@@ -1,15 +1,14 @@
 import { Plugin } from "obsidian";
-import { initSettingsTab } from "./src/settings";
-import { registerCommands } from "./src/commands";
+import { registerPhotoProcessor } from "./src/processor";
+import { logDebug } from "./src/logger";
 
 export default class LensLoopPlugin extends Plugin {
   async onload() {
-    console.log("LensLoop loaded.");
-    initSettingsTab(this);
-    registerCommands(this);
+    logDebug("LensLoop plugin loaded.");
+    registerPhotoProcessor(this);
   }
 
   onunload() {
-    console.log("LensLoop unloaded.");
+    logDebug("LensLoop plugin unloaded.");
   }
 }

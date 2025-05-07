@@ -1,0 +1,8 @@
+File,Description
+main.ts,"Plugin entry point, loads processor"
+src/processor.ts,Registers markdown processor for `lensloop`
+src/config.ts,Parses config key=value from code block
+src/folder.ts,Handles folder resolution logic (stub)
+src/images.ts,Filters image files from folder (stub)
+src/renderMobile.ts,Stub for mobile gallery rendering
+src/renderDesktop.ts,Stub for desktop gallery rendering

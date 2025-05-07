@@ -1,0 +1,1 @@
+//Filters image files from folder (stub)

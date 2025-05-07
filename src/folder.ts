@@ -8,13 +8,23 @@ export async function resolveFolder(
 ): Promise<TFolder | null> {
   const baseFolder = config["folder"]?.trim() || "Journal_Photos";
   //const dateString = moment().format("YYYY-MM-DD");
-  let dateString = moment().format("YYYY-MM-DD");
+  let dateString = window.moment().format("YYYY-MM-DD");
 
 const notePath = ctx.sourcePath;
 const noteFilename = notePath?.split("/").pop()?.replace(".md", "");
-if (noteFilename && window.moment(noteFilename, "YYYY-MM-DD", true).isValid()) {
-  dateString = noteFilename;
+
+if (noteFilename) {
+  const parsed = window.moment(noteFilename, "YYYY-MM-DD", true);
+  if (parsed.isValid()) {
+    logDebug("Using date from note filename:", noteFilename);
+    dateString = parsed.format("YYYY-MM-DD");
+  } else {
+    logDebug("Note filename not a valid date:", noteFilename);
+  }
+} else {
+  logDebug("ctx.sourcePath missing or invalid:", notePath);
 }
+
   const fullPath = normalizePath(`${baseFolder}/${dateString}`);
   const vault = (window.app as any).vault; // Access 'app' from the global 'window' object
 

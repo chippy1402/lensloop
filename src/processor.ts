@@ -1,7 +1,7 @@
-//Registers markdown processor for `lensloop`
 import { Plugin } from "obsidian";
 import { parseConfig } from "./config";
 import { resolveFolder } from "./folder";
+import { getImagesInFolder } from "./images";
 import { logDebug } from "./logger";
 
 export function registerPhotoProcessor(plugin: Plugin) {
@@ -15,8 +15,15 @@ export function registerPhotoProcessor(plugin: Plugin) {
       return;
     }
 
-    // Simple confirmation
-    el.createEl("p", { text: `📂 Folder ready: ${folder.path}` });
-    logDebug("✅ Folder resolved:", folder.path);
+    const images = getImagesInFolder(folder);
+
+    if (images.length === 0) {
+      el.createEl("p", { text: "📭 No images found in folder." });
+      logDebug("No images found in folder:", folder.path);
+      return;
+    }
+
+    el.createEl("p", { text: `🖼️ Found ${images.length} image(s).` });
+    logDebug("📸 Found images:", images.map(f => f.path));
   });
 }

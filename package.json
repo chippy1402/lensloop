@@ -3,11 +3,15 @@
   "version": "0.0.1",
   "main": "dist/main.js",
   "scripts": {
-  "build": "esbuild main.ts --bundle --outfile=dist/main.js --format=cjs --external:obsidian",
-  "watch": "esbuild main.ts --bundle --outfile=dist/main.js --format=cjs --external:obsidian --watch"
-},
+    "build": "esbuild main.ts --bundle --outfile=dist/main.js --format=cjs --external:obsidian",
+    "watch": "esbuild main.ts --bundle --outfile=dist/main.js --format=cjs --external:obsidian --watch"
+  },
   "devDependencies": {
+    "@types/node": "^22.15.15",
     "esbuild": "^0.25.4",
     "typescript": "^5.3.3"
+  },
+  "dependencies": {
+    "sharp": "^0.34.1"
   }
 }
